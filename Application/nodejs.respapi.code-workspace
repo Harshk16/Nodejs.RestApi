@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "Source"
+		}
+	],
+	"settings": {
+		"editor.insertSpaces": false,
+		"editor.detectIndentation": false,
+		"editor.tabSize": 4,
+		"editor.autoIndent": true,
+		"editor.formatOnSave": true,
+		"beautify.config": {
+			"indent_size": 4,
+			"indent_char": " ",
+			"css": {
+				"indent_size": 4
+			}
+		},
+		"java.configuration.updateBuildConfiguration": "automatic",
+	}
+}
