@@ -14,7 +14,9 @@ module.exports = class TestService extends BaseService {
       TestModel.findOne({ email: req.body.email }).then(data => {
         // console.log("Email exist", data);
         if (data != null) {
+          next(data);
           return new Error("email is already exists");
+          next();
           //   return res.status(400).json({ email: "email is already exists" });
         } else {
           const newData = new TestModel({
@@ -38,7 +40,17 @@ module.exports = class TestService extends BaseService {
     console.log("Service called1");
   }
 
-  async getUser() {
+  static getUser(req, res, next) {
+    try {
+      if (req.body != "10") {
+        console.log("Service called...");
+        throw new Error("email is exists");
+        next();
+      }
+    } catch (error) {
+      throw new Error(error);
+      next();
+    }
     console.log("Service called2");
   }
 };

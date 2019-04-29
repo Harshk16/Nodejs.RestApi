@@ -7,8 +7,16 @@ const responseService = require("../../RestApi.Core/RestApi.Core.Services/servic
 // @desc   Sample Data
 // @access Public
 router.get("/", (req, res, next) => {
-  var result = testService.registerData(req);
-  if (result.status == 200) return result.status(200);
+  console.log("Controller called....");
+  try {
+    return testService.getUser("1234");
+  } catch (error) {
+    console.log("Controller error abd:::", error);
+    // throw new Error(error);
+    // next();
+    return res.status(400).json(error.Error);
+  }
+  //   if (result.status == 200) return result.status(200);
 });
 
 // @route  Post api/test
@@ -18,8 +26,8 @@ router.post("/", async (req, res) => {
   try {
     var result = await testService.registerData(req.body);
     return responseService.sendSuccessResponse(res, result);
-  } catch (err) {
-    return next(err);
+  } catch (error) {
+    next(error);
   }
 });
 

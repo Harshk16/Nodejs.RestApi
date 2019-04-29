@@ -4,14 +4,15 @@ const bodyParser = require("body-parser");
 
 const testController = require("./RestApi.Web.Api/controllers/TestController");
 
+// DB Config
+const db = require("./RestApi.Domain/RestApi.Domain.Database/config/keys")
+  .mongoURI;
+
 const app = express();
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// DB Config
-const db = require("./RestApi.Domain/config/keys").mongoURI;
 
 // Connect to MongoDB
 mongoose
