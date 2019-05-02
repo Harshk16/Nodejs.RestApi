@@ -1,30 +1,11 @@
-require("express-async-errors");
-const error = require("./RestApi.Core/Middleware/error");
 const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-
-const testController = require("./RestApi.Web.Api/controllers/TestController");
-
-// DB Config
-const db = require("./RestApi.Domain/Database/config/keys").mongoURI;
-
+const winston = require("winston");
 const app = express();
 
-// Body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-// Connect to MongoDB
-mongoose
-  .connect(db, { useNewUrlParser: true })
-  .then(() => console.log("Sucessfull Connection"))
-  .catch(err => console.log(err));
-
-// Use Routes
-app.use("/api/test", testController);
-app.use(error);
+require("./RestApi.Domain/Logger/log")();
+require("./RestApi.Web.Startup/routes/routes")(app);
+require("./RestApi.Domain/Database/db")();
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`server running on port ${port}`));
+app.listen(port, () => winston.info(`server running on port ${port}`));

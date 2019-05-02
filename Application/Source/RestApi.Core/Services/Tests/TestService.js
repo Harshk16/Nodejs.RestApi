@@ -47,10 +47,9 @@ module.exports = class TestService extends BaseService {
     let data;
     console.log("Body called...", req);
     try {
-      if (req != "") {
-        throw new Error("Invalid request");
+      if (req == "1234") {
+        data = req;
       }
-      data = req;
     } catch (error) {
       throw new Error(error);
       //   next(error);
