@@ -1,3 +1,5 @@
+require("express-async-errors");
+const error = require("./RestApi.Core/Middleware/error");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -5,8 +7,7 @@ const bodyParser = require("body-parser");
 const testController = require("./RestApi.Web.Api/controllers/TestController");
 
 // DB Config
-const db = require("./RestApi.Domain/RestApi.Domain.Database/config/keys")
-  .mongoURI;
+const db = require("./RestApi.Domain/Database/config/keys").mongoURI;
 
 const app = express();
 
@@ -22,6 +23,7 @@ mongoose
 
 // Use Routes
 app.use("/api/test", testController);
+app.use(error);
 
 const port = process.env.PORT || 5000;
 

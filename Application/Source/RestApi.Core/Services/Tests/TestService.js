@@ -1,5 +1,8 @@
-const TestModel = require("../../../RestApi.Core.Models/models/TestModel/TestModel");
+const TestModel = require("../../Models/Test/TestModel");
+const responseService = require("../ResponseService");
 const BaseService = require("../BaseService");
+const express = require("express");
+const router = express.Router();
 
 module.exports = class TestService extends BaseService {
   constructor() {
@@ -41,16 +44,20 @@ module.exports = class TestService extends BaseService {
   }
 
   static getUser(req, res, next) {
+    let data;
+    console.log("Body called...", req);
     try {
-      if (req.body != "10") {
-        console.log("Service called...");
-        throw new Error("email is exists");
-        next();
+      if (req != "") {
+        throw new Error("Invalid request");
       }
+      data = req;
     } catch (error) {
       throw new Error(error);
-      next();
+      //   next(error);
     }
     console.log("Service called2");
+    // res.json({ data });
+    // responseService.sendSuccessResponse(req, data);
+    return data;
   }
 };

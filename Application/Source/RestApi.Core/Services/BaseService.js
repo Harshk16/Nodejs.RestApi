@@ -8,9 +8,9 @@ module.exports = class MainService extends EventEmitter {
     this._config = config;
   }
 
-  //   _getConfig() {
-  //     return this._config;
-  //   }
+  _getConfig() {
+    return this._config;
+  }
 
   throwError(err) {
     const self = this;

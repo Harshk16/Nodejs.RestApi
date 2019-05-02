@@ -1,22 +1,37 @@
+const asyncMiddleware = require("../../RestApi.Core/Middleware/async");
 const express = require("express");
 const router = express.Router();
-const testService = require("../../RestApi.Core/RestApi.Core.Services/services/Tests/TestService");
-const responseService = require("../../RestApi.Core/RestApi.Core.Services/services/ResponseService");
+const testService = require("../../RestApi.Core/Services/Tests/TestService");
+const responseService = require("../../RestApi.Core/Services/ResponseService");
 
 // @route  Get api/test
 // @desc   Sample Data
 // @access Public
-router.get("/", (req, res, next) => {
+// router.get("/", asyncMiddleware(async (req, res, next) => {
+//   console.log("Controller called....");
+//   let customers;
+//   try {
+//     customers = testService.getUser(1234);
+//     console.log("customers...", customers);
+//     responseService.sendSuccessResponse(res, customers);
+//     //   res.json({ customers });
+//   } catch (error) {
+//     console.log("Controller error abd:::", error);
+//     // Working
+//     res.status(500).json({ error: error.toString() });
+//     // Working
+//     // responseService.sendErrorResponse(res, error.toString());
+//   }
+// });
+
+// @route  Get api/test
+// @desc   Sample Data
+// @access Public
+router.get("/test", async (req, res) => {
   console.log("Controller called....");
-  try {
-    return testService.getUser("1234");
-  } catch (error) {
-    console.log("Controller error abd:::", error);
-    // throw new Error(error);
-    // next();
-    return res.status(400).json(error.Error);
-  }
-  //   if (result.status == 200) return result.status(200);
+  const customers = testService.getUser(1234);
+  console.log("customers...", customers);
+  responseService.sendSuccessResponse(res, customers);
 });
 
 // @route  Post api/test
