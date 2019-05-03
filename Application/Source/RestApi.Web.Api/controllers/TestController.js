@@ -28,6 +28,7 @@ const responseService = require("../../RestApi.Core/Services/ResponseService");
 // @desc   Sample Data
 // @access Public
 router.get("/test", async (req, res) => {
+  throw new Error("Invalid");
   console.log("Controller called....");
   const customers = testService.getUser(1234);
   console.log("customers...", customers);

@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const error = require("../../RestApi.Web.Api/controllers/TestController");
+const error = require("../../RestApi.Core/Middleware/error");
 
 const testController = require("../../RestApi.Web.Api/controllers/TestController");
 
