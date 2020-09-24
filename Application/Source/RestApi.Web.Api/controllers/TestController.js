@@ -39,12 +39,9 @@ router.get("/test", async (req, res) => {
 // @desc   Sample Data
 // @access Public
 router.post("/", async (req, res) => {
-  try {
-    var result = await testService.registerData(req.body);
-    return responseService.sendSuccessResponse(res, result);
-  } catch (error) {
-    next(error);
-  }
+  console.log("regist user called...");
+  var result = await testService.registerUser(req.body);
+  return responseService.sendSuccessResponse(res, result);
 });
 
 module.exports = router;
